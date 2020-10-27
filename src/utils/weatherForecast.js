@@ -8,7 +8,7 @@ const weatherForecast = ({ latitude, longitude } = {}, callback) => {
   } else if (body.message) {
    callback("Nothing to geocode, Please check Latitude and Longitude", undefined);
   } else {
-   callback(undefined, `${body.weather[0].description}. It is currently ${body.main.temp} degrees out there `);
+   callback(undefined, body);
   }
  });
 }

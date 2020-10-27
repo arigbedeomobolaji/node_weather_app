@@ -5,6 +5,8 @@ const path = require("path");
 const express = require("express");
 const hbs = require("hbs");
 
+const port = process.env.PORT || 3000;
+
 //Utils modules
 const geoCode = require("./utils/geocode");
 const weatherForecast = require("./utils/weatherForecast");
@@ -82,9 +84,10 @@ app.get("/weather", (req, res) => {
     });
    }
    res.send({
-    forecast: weatherData,
+    forecast: `${weatherData.weather[0].description}. It is currently ${weatherData.main.temp} degrees out there`,
     location: data.location,
-    address: address
+    address: address,
+    icon: weatherData.weather[0].icon
    });
   });
 
@@ -113,6 +116,6 @@ app.get("*", (req, res) => {
 });
 
 
-app.listen(3000, () => {
- console.log("Server currently listening on port 3000");
+app.listen(port, () => {
+ console.log("Server currently listening on port " + port);
 });
